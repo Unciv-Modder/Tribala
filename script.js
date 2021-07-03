@@ -79,12 +79,11 @@ function setScene (scene, id) {
     for (i in scene) {
     
       if (scene[i].hasOwnProperty('b')) {
-      
-        if (scene[i].b(scene) != undefined && scene[i] != undefined) {
-
-          document.getElementById('game').innerHTML += `<div>${scene[i].b(scene)}</div>`;
+          
+        var anus = scene[i].b(scene);
+        if (anus != undefined) {
+          document.getElementById('game').innerHTML += `<div>${anus}</div>`;
           document.getElementById('game').innerHTML += '<br><br>';
-        
         }
       
       }
@@ -210,7 +209,6 @@ var linguo = {
      'ei',
      'ii',
      'iu',
-     'oi',
      'oo',
      'ou',
      'ua',
@@ -286,7 +284,7 @@ game ={
 }
 function newCiv(count) {
   
-  return {
+  var bruh = {
     
     id:count,
     
@@ -303,13 +301,29 @@ function newCiv(count) {
     }},
     
     discoveries: {a:[], b:function(a) {
-      
+    
+      aa = `${a.name.a} has discovered`
       if (a.discoveries.a.length > 1) {
-        return `${a.name.a} has discovered ${a.discoveries.a.slice(0, a.discoveries.a.length-1).join(', ')} and ${ a.discoveries.a[a.discoveries.a.length-1]}.`;
+      
+        for (i in a.discoveries.a) {
+        
+          if (i < a.discoveries.a.length-1) {
+          
+            aa = `${aa}, ${game.discoveries[a.discoveries.a[i]](a)[1]}`;
+            
+          }
+          else {
+          
+            aa = `${aa}, and ${game.discoveries[a.discoveries.a[i]](a)[1]}`;
+            
+          }
+          
+        }
+        
       }
       else if (a.discoveries.a.length > 0){
         
-        return `${a.name.a} has discovered ${a.discoveries.a[0]}.`
+        return `${a.name.a} has discovered ${game.discoveries[a.discoveries.a[0]](a)[1]}.`
         
       }
       
@@ -319,7 +333,7 @@ function newCiv(count) {
       
       if (a.discoveries.a.includes('Bronze')) {
         
-        return `${a.name.a} has ${abr(a.bronze.a)} bronze <img src='bronze.png' style='width:25px;height:25px;'></img>`
+        return `${a.name.a} has ${abr(a.bronze.a)} bronze <img src='bronze.png' style='width:25px;height:25px;'/>`
         
       }
       
@@ -327,13 +341,13 @@ function newCiv(count) {
     
     stone:{a:0, b:function (a) {
     
-      return `${a.name.a} has ${abr(a.stone.a)} stones <img src='rock.png' style='width:25px;height:25px;'></img>`
+      return `${a.name.a} has ${abr(a.stone.a)} stones <img src='rock.png' style='width:25px;height:25px;'/>`
     
     }},
     
     food:{a:50, b:function (a) {
     
-      return `${a.name.a} has enough food to sustain ${abr(a.food.a)} people this week`
+      return `${a.name.a} has enough food to sustain ${abr(a.food.a)} people this week <img src='food.png' style='width:25px;height:25px;'/>`
     
     }},
     
@@ -386,7 +400,7 @@ function newCiv(count) {
     
     crafters:{a:0, b:function (a) {
         
-      if (a.discoveries.a.includes('Basic Crafting')) {
+      if (a.discoveries.a.includes('bCrafting')) {
         used = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a +  + a.sCollectors.a + a.crafters.a + a.bMiners.a)
         return `<br><br>${button(unused > 0 && a.id == 0, [`assign("+crafters")`, '+'])}<h4>--- ${abr(a.crafters.a * 100)}% are crafting (${abr(a.crafters.a * a.population.a)}) ---</h4>${button(a.crafters.a > 0 && a.id == 0, ['assign("-crafters")', '-'])}`;
       }
@@ -395,12 +409,36 @@ function newCiv(count) {
     
     sWeaponers:{a:0, b:function (a) {
     
-      if (a.discoveries.a.includes('Basic Crafting')) {
+      if (a.discoveries.a.includes('bCrafting')) {
         
         unused = 1 - (a.sWeaponers.a)
         return `<br><br>${button(unused > 0 && a.id == 0, ['assign("+sWeaponers")', '+'])}<p>${abr(a.sWeaponers.a * 100)}% of ${a.name.a}'s crafters are crafting weapons from stone (${abr(a.sWeaponers.a * (a.crafters.a * a.population.a))})</p>${button(a.soldiers.a > 0 && a.id == 0, ['assign(-sWeaponers")', '-'])}`;
         
       }
+      
+    }},
+    
+    settlements:{a:[{name:Capitalize(linguo.word(3)), population:{a:1, b:{}}}], b:function (a) {
+    
+      var aaaa = `<h3>${a.name.a} has ${a.settlements.a.length} settlements</h3> ${button(!sShow, ['sShow=true;update()', 'Show'])} ${button(sShow, ['sShow=false;update()', 'Hide'])}`
+      if (sShow) {
+         
+         for (i in a.settlements.a) {
+            
+            aaaa = `${aaaa}<br>${a.settlements.a[i].name} has a population of ${abr(a.settlements.a[i].population.a * a.population.a)} and is ${a.settlements.a[i].population.b[a.name.a] * 100}% Natively ${a.name.a}`;
+            
+         }
+         
+      }
+      
+      else {
+        
+        aaaa = `${aaaa}`;
+        
+      }
+      
+      
+      return `${aaaa}`;
       
     }},
     
@@ -410,32 +448,12 @@ function newCiv(count) {
       unused = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a +  + a.sCollectors.a + a.crafters.a + a.bMiners.a)
       return `<br><br>${button(unused > 0 && a.id == 0, ['assign("+soldiers")', '+'])}<h4>--- ${abr(a.soldiers.a * 100)}% of them are serving in the military (${abr(a.soldiers.a * a.population.a)}) ---</h4>${button(a.soldiers.a > 0 && a.id == 0, ['assign("-soldiers")', '-'])}`;
       
-    }},
-    
-    settlements:{a:[{name:Capitalize(linguo.word(3)), population:{a:1, b:{}}}], show:false, b:function (a) {
-    
-      aaaa = `<h3>${a.name.a} has ${a.settlements.a.length} settlements</h3> ${button(!sShow, ['sShow=true;update()', 'Show'])} ${button(sShow, ['sShow=hide;update()', 'Hide'])}`
-      if (sShow) {
-         
-         for (i in a.settlements.a) {
-            
-            aaaa = aaaa + `${a.settlements.a[i].name} has a population of ${abr(a.settlements.a[i].population.a * a.population.a)} and is ${a.settlements.a[i].population.a * a.settlements.a[i].population.a * a.settlements.a[i].population.b[a.name.a]}% ${a.name.a}`;
-            
-         }
-         
-      }
-      
-      else {
-        
-        aaaa += ``
-        
-      }
-      a.settlements.a[0].population.b[a.name.a] = 10;
-      return aaaa;
-      
     }}
     
   }
+  
+  bruh.settlements.a[0].population.b[bruh.name.a] = 1;
+  return bruh;
   
 }
 
@@ -497,15 +515,15 @@ function income (a) {
   
   for (i in game.discoveries) {
     
-    if (!user.discoveries.a.includes(game.discoveries[i](user)[1]) && game.discoveries[i](user)[0]) {
+    if (!user.discoveries.a.includes(i) && game.discoveries[i](user)[0]) {
       
-      civs[a].discoveries.a.push(game.discoveries[i](user)[1]);
+      civs[a].discoveries.a.push(i);
       
     }
     
-    else if (user.discoveries.a.includes(game.discoveries[i](user)[1]) && !game.discoveries[i](user)[0]) {
+    else if (user.discoveries.a.includes(i) && !game.discoveries[i](user)[0]) {
       
-      civs[a].discoveries.a.pop(game.discoveries[i](user)[1]);
+      civs[a].discoveries.a.pop(i);
       
     }
     
@@ -745,9 +763,9 @@ setInterval(function() {
   c.drawImage(img[0],window.innerWidth+frame1,0,window.innerWidth,window.innerHeight);
   c.drawImage(img[3],window.innerWidth+frame1-window.innerWidth,0,window.innerWidth,window.innerHeight);
   c.drawImage(img[0],window.innerWidth+frame1-window.innerWidth*2,0,window.innerWidth,window.innerHeight);
-  frame1 += 5;
-  frame2 += 2.5;
-  frame3 += 1;
+  frame1 += window.innerWidth/500;
+  frame2 += window.innerWidth/500;
+  frame3 += window.innerWidth/500;
   if (window.innerWidth+frame3-window.innerWidth > window.innerWidth+1) {
     frame3 = -window.innerWidth
   }
@@ -757,5 +775,7 @@ setInterval(function() {
   if (window.innerWidth+frame1-window.innerWidth > window.innerWidth) {
     frame1 = -window.innerWidth
   }
-}, 1000/15)
+  console.log(window.innerWidth/500, window.innerWidth/250, window.innerWidth/100)
+}, 1000/15);
+
 mainMenu();
