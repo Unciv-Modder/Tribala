@@ -347,7 +347,7 @@ function newCiv(count) {
     
     food:{a:50, b:function (a) {
     
-      return `${a.name.a} has enough food to sustain ${abr(a.food.a)} people this week <img src='https://github.com/Unciv-Modder/Tribala/blob/main/food.png' style='width:25px;height:25px;'/>`
+      return `${a.name.a} has enough food to sustain ${abr(a.food.a)} people this week <img src='food.png' style='width:25px;height:25px;'/>`
     
     }},
     
