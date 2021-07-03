@@ -775,7 +775,7 @@ setInterval(function() {
   if (window.innerWidth+frame1-window.innerWidth > window.innerWidth) {
     frame1 = -window.innerWidth
   }
-  console.log(window.innerWidth/500, window.innerWidth/250, window.innerWidth/100)
+  
 }, 1000/15);
 
 mainMenu();
