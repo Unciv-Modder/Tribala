@@ -2,8 +2,12 @@
 
 
 
+
 sShow = false
 
+function unu(a) {
+   return 1 - (a.hunters.a + a.bMiners.a + a.gardeners.a + a.crafters.a + a.soldiers.a + a.sCollectors.a)
+}
 
 function d(a) {
   
@@ -260,17 +264,17 @@ game ={
     
     },
   
-    Agriculture: function (a) {
+    Gardening: function (a) {
     
-      if (a.discoveries.a.includes('Agriculture') || Math.floor(Math.random() * 100) > 45) {
+      if (a.discoveries.a.includes('Gardening') || Math.floor(Math.random() * 100) > 45) {
       
-        return [true, 'Agriculture']
+        return [true, 'Gardening']
       
       }
     
       else {
       
-        return [false, 'Agriculture']
+        return [false, 'Gardening']
       
       }
     
@@ -367,23 +371,32 @@ function newCiv(count) {
     
     hunters:{a:0.5, b:function (a) {
    
-      unused = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a + a.sCollectors.a + a.crafters.a + a.bMiners.a)
+      unused = unu(a);
       return `${button(unused > 0 && a.id == 0, ['assign("+hunters"), 0', '+'])}<p>${abr(a.hunters.a * 100)}% are hunting (${abr(a.hunters.a * a.population.a)})</p>${button(a.hunters.a > 0 && a.id == 0, ['assign("-hunters"), 0', '-'])}`;
       
     }},
     
     farmers:{a:0, b:function (a) {
     
-      if (a.discoveries.a.includes('Agriculture')) {
-        used = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a  + a.sCollectors.a + a.crafters.a + a.bMiners.a)
+      if (a.discoveries.a.includes('Farming')) {
+        unused = unu(a);
         return `<br><br>${button(unused > 0 && a.id == 0, [`assign("+farmers")`, '+'])}<p>${abr(a.farmers.a * 100)}% are farming (${abr(a.farmers.a * a.population.a)})</p>${button(a.farmers.a > 0 && a.id == 0, ['assign("-farmers")', '-'])}`;
+      }
+      
+    }},
+    
+    gardeners:{a:0, b:function (a) {
+    
+      if (a.discoveries.a.includes('Gardening')) {
+        unused = unu(a);
+        return `<br><br>${button(unused > 0 && a.id == 0, [`assign("+gardeners")`, '+'])}<p>${abr(a.gardeners.a * 100)}% are gardening (${abr(a.gardeners.a * a.population.a)})</p>${button(a.gardeners.a > 0 && a.id == 0, ['assign("-gardeners")', '-'])}`;
       }
       
     }},
     
     bMiners:{a:0, b:function (a) {
       if (a.discoveries.a.includes('Bronze')) {
-       unused = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a + a.sCollectors.a + a.crafters.a + a.bMiners.a)
+       unused = unu(a);
        return `<br><br>${button(unused > 0 && a.id == 0, ['assign("+bMiners")', '+'])}<p>${abr(a.bMiners.a * 100)}% of them are mining (${abr(a.bMiners.a * a.population.a)})</p>${button(a.bMiners.a > 0 && a.id == 0, ['assign("-bMiners")', '-'])}`;
       }
       
@@ -391,7 +404,7 @@ function newCiv(count) {
     
     sCollectors:{a:0.5, b:function (a) {
       
-       unused = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a + a.sCollectors.a + a.crafters.a + a.bMiners.a)
+       unused = unu(a);
        return `<br><br>${button(unused > 0 && a.id == 0, ['assign("+sCollectors")', '+'])}<p>${abr(a.sCollectors.a * 100)}% of them are collecting stones (${abr(a.sCollectors.a * a.population.a)})</p>${button(a.sCollectors.a > 0 && a.id == 0, ['assign("-sCollectors")', '-'])}`;
       
     }},
@@ -399,7 +412,7 @@ function newCiv(count) {
     crafters:{a:0, b:function (a) {
         
       if (a.discoveries.a.includes('bCrafting')) {
-        used = 1 - (a.hunters.a + a.farmers.a + a.soldiers.a +  + a.sCollectors.a + a.crafters.a + a.bMiners.a)
+        unused = unu(a);
         return `<br><br>${button(unused > 0 && a.id == 0, [`assign("+crafters")`, '+'])}<h4>--- ${abr(a.crafters.a * 100)}% are crafting (${abr(a.crafters.a * a.population.a)}) ---</h4>${button(a.crafters.a > 0 && a.id == 0, ['assign("-crafters")', '-'])}`;
       }
       
@@ -724,13 +737,14 @@ function mainMenu () {
 
   $('html id title').innerHTML = Capitalize(linguo.word(2));
   html.a.innerHTML = `
-    <h1>Tribe (${$('html id title').innerHTML})</h1><br>
+    <h1>Tribala (${$('html id title').innerHTML})</h1><br>
     ${button(civnum < 150, ['civnum+=1;mainMenu()', '+'])}<p>${plural(civnum, 'opponent')}</p>${button(civnum > 0, ['civnum-=1;mainMenu()', '-'])}
     <br><br><br>
     <button onclick="startstart(civnum)">Start</button><br><br><br>
     <button onclick='handbook()'>Handbook</button>
 
     <br>
+    <center foot>Product of Lumberleaf<img src='lumberleaf_logo.png' icon></center>
   `;
 }
 background = $('html new div');
@@ -774,7 +788,7 @@ setInterval(function() {
   if (window.innerWidth+frame1-window.innerWidth > window.innerWidth) {
     frame1 = -window.innerWidth
   }
-  console.log(window.innerWidth/500, window.innerWidth/250, window.innerWidth/100)
+  
 }, 1000/15);
 
 var bru = $('html id uIn');
