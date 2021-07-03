@@ -82,8 +82,7 @@ function setScene (scene, id) {
           
         var anus = scene[i].b(scene);
         if (anus != undefined) {
-          document.getElementById('game').innerHTML += `<div>${anus}</div>`;
-          document.getElementById('game').innerHTML += '<br><br>';
+          document.getElementById('game').innerHTML += `<div>${anus}</div><br><br>`;
         }
       
       }
@@ -94,8 +93,7 @@ function setScene (scene, id) {
   
   else {
     
-    document.getElementById('game').innerHTML += `${scene.name.b(scene)}<br>`;
-    document.getElementById('game').innerHTML += 'This Tribe is dead.';
+    document.getElementById('game').innerHTML += `${scene.name.b(scene)}<br>This tribe is dead`;
     
   }
   
@@ -723,6 +721,7 @@ function handbook () {
   
 }
 function mainMenu () {
+
   $('html id title').innerHTML = Capitalize(linguo.word(2));
   html.a.innerHTML = `
     <h1>Tribe (${$('html id title').innerHTML})</h1><br>
@@ -740,7 +739,7 @@ $('html add background');
 html.bg = $('html id background');
 var frame1 = 0, frame2 = 0, frame3 = 0;
 setInterval(function() {
-  html.bg.innerHTML = `<img id=bg1 src='bg1.png' hide/><img id=bg2 src='bg2.png' hide/><img id=bg3 src='bg3.png' hide/><img id=bg4 src='bg4.png' hide/><img id=bg5 src='bg5.png' hide/><img id=bg6 src='bg6.png' hide/><canvas id="c" width=${window.innerWidth} height=${window.innerHeight}/>`;
+  html.bg.innerHTML = `<img id=bg1 src='bg1.png' style='display:none;'/><img id=bg2 src='bg2.png' style='display:none;'/><img id=bg3 src='bg3.png' style='display:none;'/><img id=bg4 src='bg4.png' style='display:none;'/><img id=bg5 src='bg5.png' style='display:none;'/><img id=bg6 src='bg6.png' style='display:none;'/><canvas id="c" width=${window.innerWidth} height=${window.innerHeight} style='position:fixed;left:0;top:0;z-index:-1;'/>`;
   var c = $('html id c').getContext('2d')
   ,img = [
     $('html id bg1'),
@@ -775,7 +774,10 @@ setInterval(function() {
   if (window.innerWidth+frame1-window.innerWidth > window.innerWidth) {
     frame1 = -window.innerWidth
   }
-  
+  console.log(window.innerWidth/500, window.innerWidth/250, window.innerWidth/100)
 }, 1000/15);
+
+var bru = $('html id uIn');
+bru.innerHTML = '<p/><p/><br><br>';
 
 mainMenu();
