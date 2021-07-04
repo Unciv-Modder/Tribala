@@ -224,7 +224,7 @@ var linguo = {
 game = {
   text:[
    ['Top Text', 'Bottom Text']
-  ].
+  ],
   discoveries: {
   
     Hunting: function (a) {
@@ -740,7 +740,8 @@ function handbook () {
   
 }
 function mainMenu () {
-
+  
+  ala.play();
   $('html id title').innerHTML = Capitalize(linguo.word(3));
   html.a.innerHTML = `<header>
     <h1>Tribala (${$('html id title').innerHTML})</h1><br>
@@ -748,7 +749,6 @@ function mainMenu () {
     <br><br><br>
     <button onclick="startstart(civnum)">Start</button><br><br><br>
     <button onclick='handbook()'>Handbook</button></header>
-
     <br>
     <center foot>Product of <a href="https://www.lumberleaf.ca/"><border>Lumberleaf<img src='lumberleaf_logo.png' icon/></border></a></center>
   `;
@@ -817,8 +817,8 @@ setInterval(function() {
 
 var bru = $('html id uIn');
 bru.innerHTML = '<p/><p/><br><br>';
-
+var ala = new Audio('Well Well.wav');
 html.a.innerHTML = `
-   ${game.text[Math.round(Math.random*game.text.length)].join('<br>')}
+   ${game.text[Math.floor(Math.random()*game.text.length)].join('<br>')}<br>
    <button onclick=mainMenu()>Ok?</button>
-`
+`;
