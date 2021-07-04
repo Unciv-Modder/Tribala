@@ -753,7 +753,7 @@ $('html add background');
 html.bg = $('html id background');
 var frame1 = 0, frame2 = 0, frame3 = 0;
 setInterval(function() {
-  html.bg.innerHTML = `<img id=bg1 src='bg1.png' style='display:none;'/><img id=bg2 src='bg2.png' style='display:none;'/><img id=bg3 src='bg3.png' style='display:none;'/><img id=bg4 src='bg4.png' style='display:none;'/><img id=bg5 src='bg5.png' style='display:none;'/><img id=bg6 src='bg6.png' style='display:none;'/><canvas id="c" width=${window.innerWidth} height=${window.innerHeight} style='position:fixed;left:0;top:0;z-index:-1;'/>`;
+  html.bg.innerHTML = `<img id=bg1 src='bg1.png' style='display:none;'/><img id=bg2 src='bg2.png' style='display:none;'/><img id=bg3 src='bg3.png' style='display:none;'/><img id=bg4 src='bg4.png' style='display:none;'/><img id=bg5 src='bg5.png' style='display:none;'/><img id=bg6 src='bg6.png' style='display:none;'/><canvas id="c" width=${innerWidth} height=${innerHeight} style='position:fixed;left:0;top:0;z-index:-1;'/>`;
   var c = $('html id c').getContext('2d')
   ,img = [
     $('html id bg1'),
@@ -767,15 +767,43 @@ setInterval(function() {
   bruh = 2
   c.clearRect(0,0,window.innerWidth,window.innerHeight);
   
-  c.drawImage(img[2],window.innerWidth+frame3,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[5],window.innerWidth+frame3-window.innerWidth,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[2],window.innerWidth+frame3-window.innerWidth*2,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[1],window.innerWidth+frame2,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[4],window.innerWidth+frame2-window.innerWidth,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[1],window.innerWidth+frame2-window.innerWidth*2,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[0],window.innerWidth+frame1,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[3],window.innerWidth+frame1-window.innerWidth,0,window.innerWidth,window.innerHeight);
-  c.drawImage(img[0],window.innerWidth+frame1-window.innerWidth*2,0,window.innerWidth,window.innerHeight);
+  c.drawImage(img[2],window.innerWidth+frame3,0,window.innerWidth,window.innerHeight*2);
+  c.drawImage(img[5],window.innerWidth+frame3-window.innerWidth,0,window.innerWidth,window.innerHeight*2);
+  c.drawImage(img[2],window.innerWidth+frame3-window.innerWidth*2,0,window.innerWidth,window.innerHeight*2);
+  c.drawImage(img[1],window.innerWidth+frame2,0,innerWidth,window.innerHeight*2);
+  c.drawImage(img[4]
+    ,window.innerWidth+frame2-innerWidth
+    ,0,window.innerWidth
+    ,window.innerHeight*2
+  );
+  
+  c.drawImage(img[1]
+    ,window.innerWidth+frame2-innerWidth*2
+    ,0
+		,window.innerWidth
+		,window.innerHeight*2
+  );
+  c.drawImage(img[0]
+    ,window.innerWidth+frame1
+    ,0
+    ,innerWidth*2
+    ,innerHeight
+  );
+  
+  c.drawImage(img[3]
+    ,window.innerWidth+frame1-window.innerWidth
+    ,0
+    ,innerWidth
+    ,innerHeight*1.5
+  );
+  
+  c.drawImage(img[0]
+    ,window.innerWidth+frame1-window.innerWidth*2
+    ,0
+    ,innerWidth
+    ,innerHeight*1.5
+  );
+  
   frame1 += window.innerWidth/500;
   frame2 += window.innerWidth/500;
   frame3 += window.innerWidth/500;
