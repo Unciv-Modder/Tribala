@@ -7,6 +7,11 @@ img[icon] {
   height: 25px;
   
 }
+center {
+  
+  border: 2px solid white;
+  
+}
 * {
    
    vertical-align: middle;
