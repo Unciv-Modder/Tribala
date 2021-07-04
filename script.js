@@ -28,8 +28,10 @@ function rep(item, times) {
   
   var ret = [], i = 0;
   while (i < times) {
+     
     ret.push(item(i));
     i++;
+     
   }
   return ret;
   
