@@ -221,7 +221,10 @@ var linguo = {
    ]
   
 },
-game ={
+game = {
+  text:[
+   ['Top Text', 'Bottom Text']
+  ].
   discoveries: {
   
     Hunting: function (a) {
@@ -815,4 +818,7 @@ setInterval(function() {
 var bru = $('html id uIn');
 bru.innerHTML = '<p/><p/><br><br>';
 
-mainMenu();
+html.a.innerHTML = `
+   ${game.text[Math.round(Math.random*game.text.length)].join('<br>')}
+   <button onclick=mainMenu()>Ok?</button>
+`
