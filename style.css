@@ -1,0 +1,38 @@
+img[hide] {
+  display:none;
+}
+img[icon] {
+  
+  width: 25px;
+  height: 25px;
+  
+}
+* {
+   
+   vertical-align: middle;
+   font-family: 'Aclonica';
+   color: white;
+   font-weight: normal;
+   
+}
+center[foot] {
+  
+  position:fixed;
+  left: 0;
+  bottom: 0;
+  
+}
+button {
+  
+  background-color: transparent;
+  border: 2px solid white;
+  font-weight: bold;
+  
+}
+button:active {
+  
+  border: 2px solid grey;
+  color: grey;
+  font-weight: normal;
+  
+}
