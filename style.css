@@ -13,7 +13,7 @@ img[icon] {
    font-family: 'Aclonica';
    color: white;
    font-weight: normal;
-   cursor: url("cursor.png"), default;
+   cursor: url("cursor.svg"), default;
    
 }
 border {
