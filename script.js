@@ -86,7 +86,7 @@ function setScene (scene, id) {
           
         var anus = scene[i].b(scene);
         if (anus != undefined) {
-          document.getElementById('game').innerHTML += `<div>${anus}</div><br><br>`;
+          document.getElementById('game').innerHTML = `${document.getElementById('game').innerHTML}<div>${anus}</div><br><br>`;
         }
       
       }
@@ -544,11 +544,11 @@ function income (a) {
 
 // Make the body so we can add our elements
 document.body = $('html new body');
-var a = $('html new center');
+var a = $('html new div');
 a.id = 'uIn';
 $('html add a')
 
-// second counter
+// second counter/menu
 var a = $('html new center');
 a.id = 'a';
 $('html add a');
@@ -613,7 +613,7 @@ function update (civ = 0) {
     
     html.a.innerHTML = `<button onclick='time+=1;update();'>+</button><br>${time - seconds} seconds left until week automatically ends (${Math.round(15 / time * 100) / 100}x speed)<br>${button(time > 1, ['time-=1;update()', '-'])}`;
     seconds = 0;
-    html.game.innerHTML =  `
+    html.game.innerHTML =  `<header>
       <h1>week ${wc}</h1>
       <h2>${plural(wc/4, 'month')}</h2>
     `;
@@ -634,10 +634,11 @@ function update (civ = 0) {
     
     html.a.innerHTML = `<p>look at the handbook before playing noob</p>`
     
-    html.game.innerHTML = `<h2>Haha you lost pee pee poo poo</h2>`
+    html.game.innerHTML = `<header><h2>Haha you lost pee pee poo poo</h2>`
     html.game.innerHTML += `<button onclick='mainMenu();html.game.innerHTML=""'>Back to Main Menu</button>`
     
   }
+  html.game.innerHTML += `</header>`
   
 }
 
@@ -735,16 +736,16 @@ function handbook () {
 }
 function mainMenu () {
 
-  $('html id title').innerHTML = Capitalize(linguo.word(2));
-  html.a.innerHTML = `
+  $('html id title').innerHTML = Capitalize(linguo.word(3));
+  html.a.innerHTML = `<header>
     <h1>Tribala (${$('html id title').innerHTML})</h1><br>
     ${button(civnum < 150, ['civnum+=1;mainMenu()', '+'])}<p>${plural(civnum, 'opponent')}</p>${button(civnum > 0, ['civnum-=1;mainMenu()', '-'])}
     <br><br><br>
     <button onclick="startstart(civnum)">Start</button><br><br><br>
-    <button onclick='handbook()'>Handbook</button>
+    <button onclick='handbook()'>Handbook</button></header>
 
     <br>
-    <center foot>Product of Lumberleaf<img src='lumberleaf_logo.png' icon></center>
+    <center foot>Product of <a href="https://www.lumberleaf.ca/"><border>Lumberleaf<img src='lumberleaf_logo.png' icon/></border></a></center>
   `;
 }
 background = $('html new div');
@@ -771,23 +772,13 @@ setInterval(function() {
   c.drawImage(img[5],window.innerWidth+frame3-window.innerWidth,0,window.innerWidth,window.innerHeight*2);
   c.drawImage(img[2],window.innerWidth+frame3-window.innerWidth*2,0,window.innerWidth,window.innerHeight*2);
   c.drawImage(img[1],window.innerWidth+frame2,0,innerWidth,window.innerHeight*2);
-  c.drawImage(img[4]
-    ,window.innerWidth+frame2-innerWidth
-    ,0,window.innerWidth
-    ,window.innerHeight*2
-  );
-  
-  c.drawImage(img[1]
-    ,window.innerWidth+frame2-innerWidth*2
-    ,0
-		,window.innerWidth
-		,window.innerHeight*2
-  );
+  c.drawImage(img[4],window.innerWidth+frame2-innerWidth,0,window.innerWidth,window.innerHeight*2);
+  c.drawImage(img[1],window.innerWidth+frame2-innerWidth*2,0,window.innerWidth,window.innerHeight*2);
   c.drawImage(img[0]
     ,window.innerWidth+frame1
     ,0
-    ,innerWidth*2
-    ,innerHeight
+    ,innerWidth
+    ,innerHeight*1.5
   );
   
   c.drawImage(img[3]
