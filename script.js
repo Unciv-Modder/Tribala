@@ -742,7 +742,7 @@ function handbook () {
 function mainMenu () {
   
   ala.play();
-  ala.loop();
+  ala.loop = true;
   $('html id title').innerHTML = Capitalize(linguo.word(3));
   html.a.innerHTML = `<header>
     <h1>Tribala (${$('html id title').innerHTML})</h1><br>
